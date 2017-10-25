@@ -1,0 +1,11 @@
+# You should explore different model architecture
+model = Network()
+model.add(Conv2D('conv1', 1, 4, 5, 2, 1)) # c_in, c_out, k, pad, init_std, output shape: N x 4 X 28 x 28
+model.add(Relu('relu1'))
+model.add(AvgPool2D('pool1', 2, 0))  # output shape: N x 4 x 14 x 14
+model.add(Conv2D('conv2', 4, 4, 5, 2, 1))
+model.add(Relu('relu2'))
+model.add(AvgPool2D('pool2', 2, 0))  # output shape: N x 4 x 7 x 7
+model.add(Reshape('flatten', (-1, 196)))
+model.add(Linear('fc3', 196, 10, 0.1))
+loss = SoftmaxCrossEntropyLoss(name='softmaxloss')
